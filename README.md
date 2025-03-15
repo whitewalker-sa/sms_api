@@ -71,5 +71,5 @@ Modify `Name` to match your device's port (e.g., `/dev/ttyS0` or `COM3` on Windo
 This project is licensed under the MIT License.
 
 ## Author
-[barayiti] - [mpholouischauke@outlook.com]
+[Mpho Louis Chauke] - [mpholouischauke@outlook.com]
 
