@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tarm/serial"
 	"log"
 	"net/http"
 	"os"
-	"github.com/tarm/serial"
 )
 
 type SMSRequest struct {
@@ -21,10 +21,10 @@ func sendSMS(to, message string) error {
 	if err != nil {
 		return err
 	}
-	s.Write([]byte("AT\r")) // Initialize modem
-	s.Write([]byte(fmt.Sprintf("AT+CMGF=1\r"))) // Set SMS mode
+	s.Write([]byte("AT\r"))                              // Initialize modem
+	s.Write([]byte(fmt.Sprintf("AT+CMGF=1\r")))          // Set SMS mode
 	s.Write([]byte(fmt.Sprintf("AT+CMGS=\"%s\"\r", to))) // Set recipient
-	s.Write([]byte(message + string(26))) // Send message with Ctrl+Z to end
+	s.Write([]byte(message + "\x1A"))                    // Send message with Ctrl+Z to end
 
 	log.Printf("SMS sent to %s: %s", to, message)
 	return nil
